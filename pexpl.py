@@ -20,10 +20,10 @@ class explorer:
     __report = {}
 
     def __init__(self, builder: ARGVParser = None, targets: list = None):
-        hosts = builder.targets if builder else targets
-        self.hosts = [target.replace("http://", "").replace("https://", "") for target in hosts]
-        self.__updateThreadsAt(builder.mode)
-        self.__updateRangeAt(builder.port_range)
+        _mode, _prang, _hosts = (builder.mode, builder.port_range, builder.targets) if builder else (0, 0, targets)
+        self.hosts = [target.replace("http://", "").replace("https://", "") for target in _hosts]
+        self.__updateThreadsAt(_mode)
+        self.__updateRangeAt(_prang)
 
     def work(self):
         for target in self.hosts:
